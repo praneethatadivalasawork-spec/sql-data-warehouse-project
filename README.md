@@ -39,5 +39,5 @@ I specialize in SQL, Snowflake, Azure Data Factory, and modern data engineering 
 ---
 
 ## License
-This project is licensed under the **MIT License**:
+This project is licensed under the [MIT License](./LICENSE).
 
