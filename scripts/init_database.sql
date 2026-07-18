@@ -10,11 +10,26 @@ This script will permanently delete all existing data in the bronze, silver, and
 Make sure you have a backup of your data before running this script, in case you need it later.
 */
 
-DROP DATABASE IF EXISTS bronze;
-DROP DATABASE IF EXISTS silver;
-DROP DATABASE IF EXISTS gold;
+--creating db and schemas using create 
+use master;
+go
 
-CREATE DATABASE bronze;
-CREATE DATABASE silver;
-CREATE DATABASE gold;
+if exists(select 1 from sys.databases where name = 'DataWarehouse')
+begin
+	alter database DataWarehouse set single_user with rollback immediate;
+	drop database DataWarehouse;
+end;
+go
+create database DataWarehouse;
+go
 
+use DataWarehouse;
+go
+
+create schema bronze;
+go
+
+create schema silver;
+go
+
+create schema gold;
