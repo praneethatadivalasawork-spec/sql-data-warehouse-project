@@ -1,70 +1,77 @@
-/*===============================================================================
-DDL Script: Create Bronze Tables
-===============================================================================
-Script Purpose:
-    This script creates tables in the 'bronze' schema, dropping existing tables 
-    if they already exist.
-	  Run this script to re-define the DDL structure of 'bronze' Tables
+/* ============================================================================
+creating the ddl tables for bronze layer
+this script drops the table if exists and creates the table
 ===============================================================================
 */
-
--- creating all the tables for the bronze layer.
--- under crm folder we have 3 datasets and erp as 3 datasets.
-  
-DROP TABLE IF EXISTS bronze.crm_cust_info;
+if object_id('bronze.crm_cust_info','U') is not null
+	drop table bronze.crm_cust_info;
 create table bronze.crm_cust_info(
-	cst_id INT,
-    cst_key varchar(50),
-    cst_firstname varchar(50),
-    cst_lastname varchar(50),
-    cst_material_status varchar(50),
-    cst_gndr varchar(50),
-    cst_create_date date
-    );
+	cst_id	int,
+	cst_key	nvarchar(50),
+	cst_firstname nvarchar(50),
+	cst_lastname nvarchar(50),
+	cst_marital_status nvarchar(50),
+	cst_gndr nvarchar(50),
+	cst_create_date date
 
-Drop table if exists bronze.crm_prd_info;
+);
+go
+if object_id('bronze.crm_prd_info','U') is not null
+	drop table bronze.crm_prd_info;
 create table bronze.crm_prd_info(
 	prd_id	int,
-    prd_key	varchar(50),
-    prd_nm	varchar(50),
-    prd_cost int,	
-    prd_line varchar(50),
-    prd_start_dt date,
-    prd_end_dt date
+	prd_key	nvarchar(50),
+	prd_nm	nvarchar(50),
+	prd_cost int,
+	prd_line nvarchar(50),
+	prd_start_dt date,	
+	prd_end_dt date
 
 );
 
-drop table if exists bronze.crm_sales_details;
+go
+if object_id('bronze.crm_sales_details','U') is not null
+	drop table bronze.crm_sales_details;
+
 create table bronze.crm_sales_details(
-	sls_ord_num	varchar(50),
-    sls_prd_key	varchar(50),
-    sls_cust_id	int,
-    sls_order_dt int,
-    sls_ship_dt	int,
-    sls_due_dt	int,
-    sls_sales	int,
-    sls_quantity int,
-    sls_price int
+	sls_ord_num	nvarchar(50),
+	sls_prd_key	nvarchar(50),
+	sls_cust_id	int,
+	sls_order_dt int,
+	sls_ship_dt	int,
+	sls_due_dt	int,
+	sls_sales	int,
+	sls_quantity int,
+	sls_price int
 
 );
 
-
-drop table if exists bronze.erp_cust_az12;
+go
+if object_id('bronze.erp_cust_az12','U') is not null
+	drop table bronze.erp_cust_az12;
 create table bronze.erp_cust_az12(
-	CID	varchar(50),
-    BDATE date,
-    GEN varchar(50)
-);
-drop table if exists bronze.erp_loc_a101;
-create table bronze.erp_loc_a101(
-	cid varchar(50),
-    cntry varchar(50)
+	CID	nvarchar(50),
+	BDATE date,
+	GEN nvarchar(50)
 );
 
-drop table if exists bronze.erp_px_cat_g1v2;
-create table bronze.erp_px_cat_g1v2(
-	id varchar(50),
-    cat varchar(50),
-    subcat varchar(50),
-    maintenance varchar(50)
+go
+
+if object_id('bronze.erp_loc_a101','U') is not null
+	drop table bronze.erp_loc_a101;
+create table bronze.erp_loc_a101(
+	CID nvarchar(50),	
+	CNTRY nvarchar(50)
 );
+go
+
+if object_id('bronze.erp_px_cat_g1v2','U') is not null
+	drop table bronze.erp_px_cat_g1v2;
+create table bronze.erp_px_cat_g1v2(
+	ID	nvarchar(50),
+	CAT	nvarchar(50),
+	SUBCAT nvarchar(50),
+	MAINTENANCE nvarchar(50)
+);
+
+go
