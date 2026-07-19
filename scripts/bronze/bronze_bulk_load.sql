@@ -1,4 +1,16 @@
 /* 
+===================================================================
+stored procedure : Load bronze layer (source -> bronze)
+===================================================================
+script purpose:
+	this is a stored procedure loads data into the bronze 'schema' from external csv files.
+	it performs the following actions:
+	- truncate the bronze tables before loading any data.
+	- uses the 'bulk insert' command to load data from csv files to bronze tables.
+
+usage example for stored procedure : 
+EXEC bronze.load_bronze;
+=====================================================================================
 Applying full load -- fetch all records from local to data warehouse
 using bulk insert.
 
@@ -6,6 +18,7 @@ note : check the database 'datawarehouse' is it connected to the right one.
 
 warning -- if u run bulk insert query 2 to 3 times it will create duplicates
 so before running the query just use truncate command and run these all.
+-----------------------------------------------------------------------------------
 */
 use DataWarehouse;
 go
